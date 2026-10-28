@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CloudQuiz: jogo de perguntas e respostas com placar.">
+  <title>CloudQuiz — Desafio do Conhecimento</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="CloudQuiz início"><span class="brand-mark">CQ</span><span>Cloud<span class="brand-accent">Quiz</span></span></a>
+    <div class="account">
+      <span id="connection-status" class="status"><i></i> Modo local</span>
+      <span id="user-label" class="user-label">Visitante</span>
+      <button id="auth-open" class="button button-ghost button-small">Entrar</button>
+      <button id="logout" class="button button-ghost button-small hidden">Sair</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> APRENDA JOGANDO</div>
+      <h1>Seu conhecimento.<br><span>Seu próximo nível.</span></h1>
+      <p>Responda, acumule pontos e veja sua posição no placar. Cada pergunta é uma nova chance de superar seu recorde.</p>
+      <div class="hero-stats">
+        <div><strong>10</strong><span>perguntas no banco</span></div>
+        <div><strong>+100</strong><span>pontos por acerto</span></div>
+        <div><strong>∞</strong><span>chances de jogar</span></div>
+      </div>
+    </section>
+
+    <section class="game-card" aria-live="polite">
+      <div class="card-top"><span class="pill"><span class="live-dot"></span> DESAFIO RÁPIDO</span><span id="question-counter" class="muted">Pronto para começar</span></div>
+      <div id="start-panel" class="start-panel">
+        <div class="game-icon">✦</div>
+        <h2>Vamos começar?</h2>
+        <p>São 5 perguntas por rodada. Escolha a alternativa correta e tente alcançar a maior pontuação.</p>
+        <label for="player-name">Como podemos te chamar?</label>
+        <input id="player-name" type="text" maxlength="24" placeholder="Digite seu nome" autocomplete="nickname">
+        <button id="start-game" class="button button-primary button-wide">Iniciar desafio <span>→</span></button>
+        <p class="microcopy">Não precisa criar conta para jogar.</p>
+      </div>
+      <div id="question-panel" class="question-panel hidden">
+        <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+        <div class="question-meta"><span id="category" class="category">TECNOLOGIA</span><span id="points-label" class="muted">100 pontos</span></div>
+        <h2 id="question-text">Pergunta</h2>
+        <div id="answers" class="answers"></div>
+        <div id="feedback" class="feedback hidden"></div>
+        <button id="next-question" class="button button-primary button-wide hidden">Próxima pergunta <span>→</span></button>
+      </div>
+      <div id="result-panel" class="result-panel hidden">
+        <div class="result-symbol">✓</div>
+        <p class="eyebrow centered">RODADA CONCLUÍDA</p>
+        <h2 id="result-title">Mandou bem!</h2>
+        <div class="score-total"><strong id="final-score">0</strong><span>pontos</span></div>
+        <p id="result-message">Seu resultado foi salvo.</p>
+        <div class="result-actions"><button id="play-again" class="button button-primary">Jogar novamente ↻</button><button id="view-board" class="button button-ghost">Ver placar ↓</button></div>
+      </div>
+    </section>
+
+    <section id="leaderboard" class="leaderboard">
+      <div class="section-heading"><div><p class="eyebrow">RANKING</p><h2>Placar global</h2></div><span class="trophy">🏆</span></div>
+      <p class="section-description">Os melhores resultados registrados neste navegador ou no Back4App aparecem aqui.</p>
+      <div id="leaderboard-list" class="leaderboard-list"><div class="empty-board">Ainda não há pontuações. Seja o primeiro!</div></div>
+      <button id="refresh-board" class="button button-ghost button-wide">Atualizar placar ↻</button>
+    </section>
+  </main>
+
+  <footer><span class="brand-mini">CQ</span><span>CloudQuiz · Projeto acadêmico de Software em Nuvem</span><span id="storage-note">Salvamento local ativo</span></footer>
+
+  <div id="auth-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal-card">
+      <button id="auth-close" class="modal-close" aria-label="Fechar">×</button>
+      <p class="eyebrow">CONTA DE JOGADOR</p><h2 id="auth-title">Entre para salvar seu progresso</h2>
+      <p class="modal-description">Configure o Back4App em <code>config.js</code> para ativar contas na nuvem. Enquanto isso, você pode jogar sem conta.</p>
+      <label for="auth-username">Nome de usuário</label><input id="auth-username" type="text" placeholder="Seu usuário" autocomplete="username">
+      <label for="auth-password">Senha</label><input id="auth-password" type="password" placeholder="Mínimo de 6 caracteres" autocomplete="current-password">
+      <div class="auth-actions"><button id="login" class="button button-primary">Entrar</button><button id="signup" class="button button-ghost">Criar conta</button></div>
+      <p id="auth-message" class="auth-message"></p>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden" role="status"></div>
+</body>
+</html>

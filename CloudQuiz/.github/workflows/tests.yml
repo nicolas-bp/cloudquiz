@@ -1,0 +1,28 @@
+name: CloudQuiz checks
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Verificar arquivos principais
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f app.js
+          test -f config.js
+      - name: Verificar sintaxe JavaScript
+        run: |
+          node --check app.js
+          node --check config.js

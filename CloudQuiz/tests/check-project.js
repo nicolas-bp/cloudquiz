@@ -1,0 +1,11 @@
+const fs = require("fs");
+const assert = require("assert");
+assert(fs.existsSync("index.html"), "index.html deve existir");
+assert(fs.existsSync("styles.css"), "styles.css deve existir");
+assert(fs.existsSync("app.js"), "app.js deve existir");
+const js = fs.readFileSync("app.js", "utf8");
+assert(js.includes("function start()"), "deve haver função de início");
+assert(js.includes("function choose("), "deve haver função de resposta");
+assert(js.includes("function finish("), "deve haver função de finalização");
+assert(js.includes("function renderBoard("), "deve haver renderização do placar");
+console.log("Verificações básicas do CloudQuiz concluídas.");
