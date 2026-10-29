@@ -6,7 +6,7 @@
  * 4. Sem as chaves, o jogo continua funcionando com armazenamento local.
  */
 window.CLOUDQUIZ_CONFIG = {
-  appId: "COLE_SEU_APPLICATION_ID_AQUI",
-  javascriptKey: "COLE_SUA_JAVASCRIPT_KEY_AQUI",
+  appId: "S827AZtk4huSP4B6LECZtgDwVNIXMra6QIw8OYLS",
+  javascriptKey: "edM7Y091Jk11scTqzPSTvFXCQHgFWne0WyQBACPw",
   serverURL: "https://parseapi.back4app.com/"
 };
